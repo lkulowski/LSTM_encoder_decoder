@@ -10,7 +10,7 @@ There are many instances where we want to predict how a time series will behave 
 <p align="center">
   <img src="figures/hawking.jpg" width="900">
     <br>
- <em> <font size = "4"> Forcasting web page traffic is a time series prediction problem. Using past viewership, can we predict how many times Stephen Hawking's Wikipedia page will be viewed in the future? </font> </em>  
+ <em> <font size = "4"> Forcasting web page traffic is a time series prediction problem. Using past viewership, can we \n predict how many times Stephen Hawking's Wikipedia page will be viewed in the future? </font> </em>  
 </p>
 
 Other examples of time series that we may wish to predict future values of include weather conditions (temperature, humidity, etc.), power usage, and traffic volume. The Long Short-Term Memory (LSTM) neural network is well-suited to these problem since the data may have long-term dependencies (i.e., past values may influence future values). 
