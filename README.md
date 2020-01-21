@@ -5,7 +5,7 @@
 - PyTorch
 
 ## 1 Overview 
-There are many instances where we want to predict how a time series will behave in the future. For example, given the number of times a web page was visited in the past, we may want to predict how many many times the page will be viewed in the future.
+There are many instances where we would like to predict how a time series will behave in the future. For example, we may be interested in predicting how many views a web page will receive. Given a time series of past viewership, what will the viewership be in a future time interval? Other time series we might like to predict the future values of include weather conditions (temperature, humidity, etc.), power usage, and traffic volume. In these examples, the past values of the time series can influence future values. It is therefore important to choose a modelling approach that can take these time dependencies into account. The Long Short-Term Memory (LSTM) neural network is a natural choice because it can extract important information about the time series over long time intervals. 
 
 <p align="center">
   <img src="figures/hawking.jpg" width="900">
@@ -13,6 +13,12 @@ There are many instances where we want to predict how a time series will behave 
  <em> <font size = "4"> Forcasting web page traffic is a time series prediction problem. Using past viewership, can we  <br> predict how many times Stephen Hawking's Wikipedia page will be viewed in the future? </font> </em>  
 </p>
 
-Other examples of time series that we may wish to predict future values of include weather conditions (temperature, humidity, etc.), power usage, and traffic volume. The Long Short-Term Memory (LSTM) neural network is well-suited to these problem since the data may have long-term dependencies (i.e., past values may influence future values). 
+In this project, we will build special type of LSTM neural network: the LSTM encoder-decoder. This particular architecture enables us to make sequence-to-sequence predictions. In the web traffic example, a sequence-to-sequence prediction would be providing the network with 20 days of past viewership and predicting the next 5 days of viewership. The LSTM encoder-decoder consists of two LSTMs. The first LSTM, or the encoder, processes an input sequence and generates an encoded state. The encoded state summarizes the informaiton in the input sequence. The second LSTM, or the decoder, uses the encoded state to produce an output sequence. The LSTM encoder-decoder architecture is shown below. 
 
-In this project, we make a sequence-to-sequence predictions, or prediction where the input and output sequences might be different lengths, using a LSTM. For Stephen Hawking's web page traffic, this might involve providing the LSTM with 20 days of past viewership and predicting the next 5 days. To make sequence-to-sequence predictions, we use a LSTM with a special architecture: the LSTM encoder-decoder. 
+<p align="center">
+  <img src="figures/encoder_decoder.png" width="900">
+    <br>
+ <em> <font size = "4"> The LSTM encoder-decoder. The encoder  </font> </em>  
+</p>
+
+
