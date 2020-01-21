@@ -16,7 +16,7 @@ There are many instances where we would like to predict how a time series will b
 In this project, we will build special type of LSTM neural network: the LSTM encoder-decoder. This particular architecture enables us to make sequence-to-sequence predictions. In the web traffic example, a sequence-to-sequence prediction would be providing the network with 20 days of past viewership and predicting the next 5 days of viewership. The LSTM encoder-decoder consists of two LSTMs. The first LSTM, or the encoder, processes an input sequence and generates an encoded state. The encoded state summarizes the informaiton in the input sequence. The second LSTM, or the decoder, uses the encoded state to produce an output sequence. The LSTM encoder-decoder architecture is shown below. 
 
 <p align="center">
-  <img src="figures/encoder_decoder.png" width="900">
+  <img src="figures/encoder_decoder.png" width="700">
     <br>
  <em> <font size = "4"> The LSTM encoder-decoder. The encoder  </font> </em>  
 </p>

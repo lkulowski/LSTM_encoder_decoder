@@ -18,7 +18,7 @@ In this project, we will build special type of LSTM neural network: the LSTM enc
 <p align="center">
   <img src="figures/encoder_decoder.png" width="700">
     <br>
- <em> <font size = "4"> The LSTM encoder-decoder. The encoder  </font> </em>  
+ <em> <font size = "4"> The LSTM encoder generates an encoded state that summarizes the information in the input sequence. The LSTM decoder takes the encoded state and uses it to produce an output sequence.  </font> </em>  
 </p>
 
 
