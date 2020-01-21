@@ -21,4 +21,4 @@ In this project, we will build special type of LSTM neural network: the LSTM enc
  <em> <font size = "4"> The LSTM encoder generates an encoded state that summarizes the information in the input sequence. The LSTM decoder takes the encoded state and uses it to produce an output sequence.  </font> </em>  
 </p>
 
-
+Here, we will focus on a simple example where we use the LSTM encoder-decoder on synthetic data. We will fit a noisy sinusoidal curve. In Sec. 2, we prepare the time series datatset to feed into our LSTM encoder-decoder. In Secon 3. we build....
