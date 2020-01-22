@@ -42,7 +42,7 @@ We treat the first 80 percent of the time series as the training set and the las
 For the LSTM encoder-decoder, we need to organize our data into sequences of $ni$ input values and $no$ target values. To do this, we slide a moving window over the dataset. We start at the first $y$ value and collect $ni$ values as input and the next $n0$ values as targets. Then, we slide our window to the second (stride = 1) or third (stride = 2) $y$ value and repeat the procedure. The windowed dataset for $ni$ = 3, $n0$ = 2, and stride = 1 is shown below. 
 
 <p align="center">
-  <img src="figures/windowed_data.png" width="700">
+  <img src="code/plots/windowed_data.png" width="700">
   </p>
 
 
