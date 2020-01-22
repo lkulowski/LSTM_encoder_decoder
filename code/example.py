@@ -12,13 +12,13 @@ import matplotlib.pyplot as plt
 import generate_dataset
 
 import matplotlib
-matplotlib.rcParams.update({'font.size': 15})
+matplotlib.rcParams.update({'font.size': 17})
 
 # generate dataset for LSTM
 t, y = generate_dataset.synthetic_data()
 t_train, y_train, t_test, y_test = generate_dataset.train_test_split(t, y, split = 0.8)
 
-plt.figure(figsize = (17, 5.3))
+plt.figure(figsize = (18, 6))
 plt.plot(t_train, y_train, color = '0.4', linewidth = 2, label = 'Train') 
 plt.plot(np.concatenate([t_train[-2:-1], t_test]), np.concatenate([y_train[-2:-1], y_test]),
          color = (0.21, 0.47, 0.69), linewidth = 2, label = 'Test')
