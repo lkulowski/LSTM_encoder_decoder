@@ -1,8 +1,10 @@
 # Building a LSTM Encoder-Deconder using PyTorch to make Sequence-to-Sequence Predictions
 
 ## Requirements 
-- Python 3 
-- PyTorch
+- `Python 3` 
+- `PyTorch`
+- `numpy`
+- `scipy`
 
 ## 1 Overview 
 There are many instances where we would like to predict how a time series will behave in the future. For example, we may be interested in forcasting web page viewership, weather conditions (temperature, humidity, etc.), power usage, or traffic volume. A sequence-to-sequence prediction for time series data involves using $m$ input values to predict the next $n$ values. An example sequence-to-sequence prediction for the number of views Stephen Hawking's Wikipedia page receives is shown below. Here, the past few months of viewership (black) is used to predict the next month of viewership (red).  
@@ -56,6 +58,9 @@ For the LSTM encoder-decoder, we need to organize our data into sequences of $ni
 
 
 ## 3 Build the LSTM Encoder-Decoder using PyTorch
+
+  We will use PyTorch to build the LSTM encoder-decoder. Although we build the encoder and decoder separate, these two modules work together during the training and when making predictions. 
+
 
 ## 4 Train the Model and Make Predictions
 
