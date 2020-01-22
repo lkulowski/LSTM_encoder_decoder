@@ -7,7 +7,7 @@
 - `scipy`
 
 ## 1 Overview 
-There are many instances where we would like to predict how a time series will behave in the future. For example, we may be interested in forcasting web page viewership, weather conditions (temperature, humidity, etc.), power usage, or traffic volume. A sequence-to-sequence prediction for time series data involves using $m$ input values to predict the next $n$ values. An example sequence-to-sequence prediction for the number of views Stephen Hawking's Wikipedia page receives is shown below. Here, the past few months of viewership (black) is used to predict the next month of viewership (red).  
+There are many instances where we would like to predict how a time series will behave in the future. For example, we may be interested in forcasting web page viewership, weather conditions (temperature, humidity, etc.), power usage, or traffic volume. A sequence-to-sequence prediction for time series data involves using _m_ input values to predict the next _n_ values. An example sequence-to-sequence prediction for the number of views Stephen Hawking's Wikipedia page receives is shown below. Here, the past few months of viewership (black) is used to predict the next month of viewership (red).  
 
 <p align="center">
   <img src="figures/hawking.jpg" width="900">
@@ -23,9 +23,9 @@ For sequence-to-sequence time series predictions, the past values of the time se
  <em> <font size = "4"> The LSTM encoder-decoder allows us to make sequence-to-sequence predictions. The LSTM encoder summarizes the information from an the input sequence in an encoded state. The LSTM decoder takes the encoded state and uses it to produce an output sequence.  </font> </em>  
 </p>
 
-The LSTM encoder-decoder consists of two LSTMs. The first LSTM, or the encoder, processes an input sequence and generates an encoded state. The encoded state summarizes the informaiton in the input sequence. The second LSTM, or the decoder, uses the encoded state to produce an output sequence. Note that the input and output sequences can have different lengths.  
+The LSTM encoder-decoder consists of two LSTMs. The first LSTM, or the encoder, processes an input sequence and generates an encoded state. The encoded state summarizes the information in the input sequence. The second LSTM, or the decoder, uses the encoded state to produce an output sequence. Note that the input and output sequences can have different lengths.  
 
-In this project, we will build a LSTM encoder-decoder to make sequence-to-sequence predictions for time series data. For illustrative purposes, we will apply our model to a synthetic time series dataset. In [Section 2](#2-preparing-the-time-series-dataset), we will prepare the synthetic time series dataset to input into our LSTM encoder decoder. In [Section 3](#3-build-the-lstm-encoder-decoder-using-pytorch), we will build the LSTM encoder-decoder using PyTorch. In [Section 4](#4-train-the-model-and-make-predictions), we will train the model and use it to make predictions. Finally, in [Section 5](#5-evaluate-lstm-encoder-decoder-on-train-and-test-datasets), we will evaluate our model on the train and test datasets.
+In this project, we will build a LSTM encoder-decoder to make sequence-to-sequence predictions for time series data. For illustrative purposes, we will apply our model to a synthetic time series dataset. In [Section 2](#2-preparing-the-time-series-dataset), we will prepare the synthetic time series dataset to input into our LSTM encoder-decoder. In [Section 3](#3-build-the-lstm-encoder-decoder-using-pytorch), we will build the LSTM encoder-decoder using PyTorch. In [Section 4](#4-train-the-model-and-make-predictions), we will train the model and use it to make predictions. Finally, in [Section 5](#5-evaluate-lstm-encoder-decoder-on-train-and-test-datasets), we will evaluate our model on the train and test datasets.
 
 ## 2 Preparing the Time Series Dataset
 
@@ -41,12 +41,11 @@ We treat the first 80 percent of the time series as the training set and the las
   <img src="code/plots/train_test_split.png" width="900">
   </p>
 
-Right now, we have our dataset as one long time series. In order to train the LSTM encoder-decoder, we will have to subdivide the time series into many examples of input values and target values. We can achieve this by _windowing_ the time series. To do this, we slide a moving window over the data and organize it into sequences of _n<sub>i</sub>_ input values and _n<sub>o</sub>_ target values. We start at the first _y_ value and collect _n<sub>i</sub>_ values as input and the next _n<sub>o</sub>_ values as targets. Then, we slide our window to the second (stride = 1) or third (stride = 2) _y_ value and repeat the procedure. An example of the windowing procedure is shown below for _n<sub>i</sub>_ = 3, _n<sub>o</sub>_ = 2, and stride = 1 is shown below. 
+Right now, we have our dataset as one long time series. In order to train the LSTM encoder-decoder, we need to subdivide the time series into many shorter sequences of _n<sub>i</sub>_ input values and _n<sub>o</sub>_ target values. We can achieve this by _windowing_ the time series. To do this, we start at the first _y_ value and collect the first _n<sub>i</sub>_ values as input and the next _n<sub>o</sub>_ values as targets. Then, we slide our window to the second (stride = 1) or third (stride = 2) _y_ value and repeat the procedure. An example of the windowing procedure is shown below for _n<sub>i</sub>_ = 3, _n<sub>o</sub>_ = 2, and stride = 1 is shown below. 
 
 <p align="center">
   <img src="figures/windowed_dataset.png" width="700">
   </p>
-
 
 
 
