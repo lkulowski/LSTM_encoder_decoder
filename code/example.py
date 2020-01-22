@@ -19,6 +19,16 @@ t, y = generate_dataset.synthetic_data()
 t_train, y_train, t_test, y_test = generate_dataset.train_test_split(t, y, split = 0.8)
 
 plt.figure(figsize = (18, 6))
+plt.plot(t, y, color = 'k', linewidth = 2)
+plt.xlim([t[0], t[-1]])
+plt.xlabel(r'$t$')
+plt.ylabel(r'$y$')
+plt.title('Synthetic Time Series')
+plt.savefig('plots/synthetic_time_series.png')
+
+
+
+plt.figure(figsize = (18, 6))
 plt.plot(t_train, y_train, color = '0.4', linewidth = 2, label = 'Train') 
 plt.plot(np.concatenate([t_train[-2:-1], t_test]), np.concatenate([y_train[-2:-1], y_test]),
          color = (0.21, 0.47, 0.69), linewidth = 2, label = 'Test')
