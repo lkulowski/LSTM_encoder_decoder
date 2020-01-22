@@ -48,8 +48,18 @@ Right now, we have our dataset as one long time series. In order to train the LS
   </p>
 
 
+We organize the input and target values of the windowing process into two matrices. The matrix, _X_, holds the 
 
-We we plotted our time series for _n<sub>i</sub>_ = 80, _n<sub>o</sub>_ = 20, and stride = 5. 
+We will feed _X_ and _Y_ into our LSTM encoder-decoder for training. and just X for testing
+
+
+input values: feed into the 
+
+compare the predictions to the 
+
+Let _N_ be the number of times the window fits the data. The LSTM encoder-decoder expects input of shape `[n<sub>]i<\sub>, # times the window fits into the data]`
+
+We have applied the windowing procedure to our synthetic time series, using _n<sub>i</sub>_ = 80, _n<sub>o</sub>_ = 20, and stride = 5. An example is shown below.  
 
 <p align="center">
   <img src="code/plots/windowed_data.png" width="500">
