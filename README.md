@@ -52,7 +52,7 @@ We will feed _X_ and _Y_ into our LSTM encoder-decoder for training. The LSTM en
 We apply the windowing procedure to our synthetic time series, using _n<sub>i</sub>_ = 80, _n<sub>o</sub>_ = 20, and stride = 5. An sample window is shown below.  
 
 <p align="center">
-  <img src="code/plots/windowed_data.png" width="500">
+  <img src="code/plots/windowed_data.png" width="600">
   </p>
   
 ## 3 Build the LSTM Encoder-Decoder using PyTorch
