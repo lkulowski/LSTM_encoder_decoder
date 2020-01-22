@@ -41,11 +41,13 @@ We treat the first 80 percent of the time series as the training set and the las
   <img src="code/plots/train_test_split.png" width="900">
   </p>
 
-Right now, we have our dataset as one long time series. In order to train the LSTM encoder-decoder, we will have to subdivide the time series into many examples of input values and target values. We can achieve this by _windowing_ the time series. To do this, we slide a moving window over the time series and organize it into sequences of _n<sub>i</sub>_ input values and _n<sub>o</sub>_ target values. We start at the first _y_ value and collect _n<sub>i</sub>_ values as input and the next _n<sub>o</sub>_ values as targets. Then, we slide our window to the second (stride = 1) or third (stride = 2) _y_ value and repeat the procedure. The procedure for windowing the dataset is shown below for _n<sub>i</sub>_ = 3, _n<sub>o</sub>_ = 2, and stride = 1 is shown below. 
+Right now, we have our dataset as one long time series. In order to train the LSTM encoder-decoder, we will have to subdivide the time series into many examples of input values and target values. We can achieve this by _windowing_ the time series. To do this, we slide a moving window over the data and organize it into sequences of _n<sub>i</sub>_ input values and _n<sub>o</sub>_ target values. We start at the first _y_ value and collect _n<sub>i</sub>_ values as input and the next _n<sub>o</sub>_ values as targets. Then, we slide our window to the second (stride = 1) or third (stride = 2) _y_ value and repeat the procedure. An example of the windowing procedure is shown below for _n<sub>i</sub>_ = 3, _n<sub>o</sub>_ = 2, and stride = 1 is shown below. 
 
 <p align="center">
   <img src="figures/windowed_dataset.png" width="700">
   </p>
+
+
 
 
 We we plotted our time series for _n<sub>i</sub>_ = 80, _n<sub>o</sub>_ = 20, and stride = 5. 
