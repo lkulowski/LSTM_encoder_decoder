@@ -30,7 +30,7 @@ In this project, we will build a LSTM encoder-decoder to make sequence-to-sequen
 For our time series, we consider a noisy sinusoidal function. We treat the first 80 percent of the time series as the training set and the last 20 percent as the test set. The train and test data is shown below. 
 
 <p align="center">
-  <img src="code/plots/train_test_split.png" width="700">
+  <img src="code/plots/train_test_split.png" width="900">
   </p>
 
 
