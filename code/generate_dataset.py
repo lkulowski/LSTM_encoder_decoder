@@ -50,3 +50,35 @@ def train_test_split(t, y, split = 0.8):
   y_test = y_test.reshape(-1, 1)
   
   return t_train, y_train, t_test, y_test 
+
+
+def windowed_dataset(y, input_window = 5, output_window = 1, stride = 1, num_features = 1):
+  
+    '''
+    create a windowed dataset
+    
+    : param y:                time series feature
+    : param input_window:     number of y samples to give model 
+    : param output_window:    number of future y samples to predict  
+    : param stide:            spacing between windows   
+    : param num_features:     number of features (i.e., 1 for us, but we could have multiple features)
+    : return X, Y:            arrays with correct dimensions for LSTM (i.e., [# samples, time steps, # features])
+    '''
+  
+    L = y.shape[0]
+    num_samples = (L - input_window - output_window) // stride + 1
+
+    X = np.zeros([input_window, num_samples, num_features])
+    Y = np.zeros([output_window, num_samples, num_features])    
+    
+    for ff in np.arange(num_features):
+        for ii in np.arange(num_samples):
+            start_x = stride * ii
+            end_x = start_x + input_window
+            X[:, ii, ff] = y[start_x:end_x, ff]
+
+            start_y = stride * ii + input_window
+            end_y = start_y + output_window 
+            Y[:, ii, ff] = y[start_y:end_y, ff]
+
+    return X, Y

@@ -8,6 +8,8 @@ Example of using a LSTM encoder-decoder to model a synthetic time series
 
 import numpy as np
 import matplotlib.pyplot as plt
+from importlib import reload
+import sys
 
 import generate_dataset
 
@@ -17,6 +19,34 @@ matplotlib.rcParams.update({'font.size': 17})
 # generate dataset for LSTM
 t, y = generate_dataset.synthetic_data()
 t_train, y_train, t_test, y_test = generate_dataset.train_test_split(t, y, split = 0.8)
+
+
+# set size of input/output windows 
+iw = 80 
+ow = 20 
+s = 5
+
+# generate windowed training/test datasets
+Xtrain, Ytrain = generate_dataset.windowed_dataset(y_train, input_window = iw, output_window = ow, stride = s)
+Xtest, Ytest = generate_dataset.windowed_dataset(y_test, input_window = iw, output_window = ow, stride = s)
+
+
+# plot an example in the windowed data 
+plt.figure(figsize = (10, 6)) 
+plt.plot(np.arange(0, iw), Xtrain[:, 0, 0], 'k', linewidth = 2, label = 'Input')
+plt.plot(np.arange(iw - 1, iw + ow), np.concatenate([[Xtrain[-1, 0, 0]], Ytrain[:, 0, 0]]),
+         linewidth = 2, label = 'Target')
+plt.xlabel(r'$t$')
+plt.ylabel(r'$y$')
+plt.title('Example of Windowed Training Data')
+plt.legend(bbox_to_anchor=(1.3, 1))
+plt.tight_layout() 
+plt.savefig('plots/windowed_data.png')
+plt.show()
+sys.exit() 
+
+
+##################################################
 
 plt.figure(figsize = (18, 6))
 plt.plot(t, y, color = 'k', linewidth = 2)
