@@ -41,13 +41,13 @@ We treat the first 80 percent of the time series as the training set and the las
   <img src="code/plots/train_test_split.png" width="900">
   </p>
 
-Right now, we have our dataset as one long time series. In order to train the LSTM encoder-decoder, we need to subdivide the time series into many shorter sequences of _n<sub>i</sub>_ input values and _n<sub>o</sub>_ target values. We can achieve this by _windowing_ the time series. To do this, we start at the first _y_ value and collect _n<sub>i</sub>_ values as input and the next _n<sub>o</sub>_ values as targets. Then, we slide our window to the second (stride = 1) or third (stride = 2) _y_ value and repeat the procedure. We do this until the window does not fit into the dataset, for a total of _n<sub>w</sub>_ times. We collect the inputs in a matrix, _X_, with shape (_n<sub>i</sub>_, _n<sub>w</sub>_) and the targets in a matrix, _Y_, with.shape (_n<sub>o</sub>_, _n<sub>w</sub>_). An example of the windowing procedure is shown below for _n<sub>i</sub>_ = 3, _n<sub>o</sub>_ = 2, and stride = 1 is shown below. 
+Right now, we have our dataset as one long time series. In order to train the LSTM encoder-decoder, we need to subdivide the time series into many shorter sequences of _n<sub>i</sub>_ input values and _n<sub>o</sub>_ target values. We can achieve this by _windowing_ the time series. To do this, we start at the first _y_ value and collect _n<sub>i</sub>_ values as input and the next _n<sub>o</sub>_ values as targets. Then, we slide our window to the second (stride = 1) or third (stride = 2) _y_ value and repeat the procedure. We do this until the window does not fit into the dataset, for a total of _n<sub>w</sub>_ times. We collect the inputs in a matrix, _X_, with shape (_n<sub>i</sub>_, _n<sub>w</sub>_) and the targets in a matrix, _Y_, with shape (_n<sub>o</sub>_, _n<sub>w</sub>_). The windowing procedure is shown schematically for _n<sub>i</sub>_ = 3, _n<sub>o</sub>_ = 2, and stride = 1 below. 
 
 <p align="center">
   <img src="figures/windowed_dataset.png" width="700">
   </p>
 
-We will feed _X_ and _Y_ into our LSTM encoder-decoder for training. The LSTM encoder-decoder expects _X_ and _Y_ to be 3-dimensional, with the third dimension being the number of features. We therefore augment the shape of _X_ to be (_n<sub>i<\sub>_, _n<sub>w<\sub>_, 1) and _Y_ to be (_n<sub>o<\sub>_, _n<sub>w<\sub>_, 1). 
+We will feed _X_ and _Y_ into our LSTM encoder-decoder for training. The LSTM encoder-decoder expects _X_ and _Y_ to be 3-dimensional, with the third dimension being the number of features. We therefore augment the shape of _X_ to be (_n<sub>i</sub>_, _n<sub>w</sub>_, 1) and _Y_ to be (_n<sub>o</sub>_, _n<sub>w</sub>_, 1). 
 
 We apply the windowing procedure to our synthetic time series, using _n<sub>i</sub>_ = 80, _n<sub>o</sub>_ = 20, and stride = 5. An sample window is shown below.  
 

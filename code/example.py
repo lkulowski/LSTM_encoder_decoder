@@ -55,13 +55,16 @@ plt.savefig('plots/train_test_split.png')
 
 # example of windowed data  
 plt.figure(figsize = (10, 6)) 
-plt.plot(np.arange(0, iw), Xtrain[:, 0, 0], 'k', linewidth = 2, label = 'Input')
+plt.plot(np.arange(0, iw), Xtrain[:, 0, 0], 'k', linewidth = 2.2, label = 'Input')
 plt.plot(np.arange(iw - 1, iw + ow), np.concatenate([[Xtrain[-1, 0, 0]], Ytrain[:, 0, 0]]),
-         color = (0.76, 0.01, 0.01), linewidth = 2, label = 'Target')
+         color = (0.76, 0.01, 0.01), linewidth = 2.2, label = 'Target')
+plt.xlim([0, iw + ow - 1])
 plt.xlabel(r'$t$')
 plt.ylabel(r'$y$')
 plt.title('Example of Windowed Training Data')
 plt.legend(bbox_to_anchor=(1.3, 1))
 plt.tight_layout() 
 plt.savefig('plots/windowed_data.png')
+
+plt.close('all')
 
