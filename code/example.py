@@ -35,7 +35,7 @@ Xtest, Ytest = generate_dataset.windowed_dataset(y_test, input_window = iw, outp
 plt.figure(figsize = (10, 6)) 
 plt.plot(np.arange(0, iw), Xtrain[:, 0, 0], 'k', linewidth = 2, label = 'Input')
 plt.plot(np.arange(iw - 1, iw + ow), np.concatenate([[Xtrain[-1, 0, 0]], Ytrain[:, 0, 0]]),
-         linewidth = 2, label = 'Target')
+         color = (0.76, 0.01, 0.01), linewidth = 2, label = 'Target')
 plt.xlabel(r'$t$')
 plt.ylabel(r'$y$')
 plt.title('Example of Windowed Training Data')
