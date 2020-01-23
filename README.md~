@@ -75,15 +75,12 @@ Teacher forcing acts like "training wheels." If the model makes a bad prediction
   <img src="figures/mixed_teacher_forcing.png" width="700">
   </p>
 
-Sometimes, we provide the LSTM decoder with the true value, while other times we require it to use the predicted value. Thus, the "training wheels" are on some of the time. When we use teacher forcing or mixed teacher forcing, we provide an option in the code called dynamic teacher forcing, where the amount of teacher forcing is slowly reduced each epoch. Dynamic teacher forcing 
+Sometimes, we provide the LSTM decoder with the true value, while other times we require it to use the predicted value. Thus, the "training wheels" are on some of the time. When we use teacher forcing or mixed teacher forcing, we provide an option in the code called dynamic teacher forcing, where the amount of teacher forcing is slowly reduced each epoch. Dynamic teacher forcing helps the model train, but then slowly transitions it to make predictions on its own. 
 
-
-Once the LSTM decoder has produced a output sequence of the desired length, we compare the predicted values to the true target values.  
+Once the LSTM decoder has produced a output sequence of the desired length, we compare the predicted values to the true target values and compute the mean squared error as our loss function. We then use backpropagation to adjust the weights in the LSTM gates to minimize the loss function.    
 
 After we have trained the LSTM encoder-decoder, we can use it to make predictions for data in the test set. All predictions for test data are done recursively. 
 
-
-it compares to the true target values and evaluates the loss function, which we use a MSE loss function. Then it backpropgates to update the weeights and make a better prediction. 
 
 ## 4 Evaluate LSTM Encoder-Decoder on Train and Test Datasets
 
