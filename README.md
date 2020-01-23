@@ -83,3 +83,4 @@ After we have trained the LSTM encoder-decoder, we can use it to make prediction
 
 ## 4 Evaluate LSTM Encoder-Decoder on Train and Test Datasets
 
+Now that we have built the LSTM encoder-decoder, we can evaluate its performance on the time series data.  

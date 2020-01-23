@@ -20,7 +20,7 @@ def synthetic_data(Nt = 2000, tf = 80 * np.pi):
     '''
     
     t = np.linspace(0., tf, Nt)
-    y = np.sin(2. * t) + 0.3 * np.sin(1. * t) + 0.5 * np.cos(t) + 1.2 * np.cos(0.5 * t + 0.2) + np.random.normal(0., 0.05, Nt)
+    y = np.sin(2. * t) + 0.5 * np.cos(t) + np.random.normal(0., 0.2, Nt)
 
     return t, y
 

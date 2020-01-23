@@ -81,6 +81,5 @@ Once the LSTM decoder has produced a output sequence of the desired length, we c
 
 After we have trained the LSTM encoder-decoder, we can use it to make predictions for data in the test set. All predictions for test data are done recursively. 
 
-
 ## 4 Evaluate LSTM Encoder-Decoder on Train and Test Datasets
 
