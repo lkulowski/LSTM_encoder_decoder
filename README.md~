@@ -57,13 +57,25 @@ We apply the windowing procedure to our synthetic time series, using _n<sub>i</s
   
 ## 3 Build the LSTM Encoder-Decoder using PyTorch
 
-We use PyTorch to build the LSTM encoder-decoder in `lstm.py`. The LSTM encoder takes an input sequence and produces an encoded state (i.e., cell state and hidden state). We feed the last encoded state produced by the LSTM encoder as well as the last value of the input data into the LSTM decoder. With this information, the LSTM decoder makes predictions. During training, we allow the LSTM decoder to make predictions in three different ways. First, we can predict recursively. 
+We use PyTorch to build the LSTM encoder-decoder in `lstm.py`. The LSTM encoder takes an input sequence and produces an encoded state (i.e., cell state and hidden state). We feed the last encoded state produced by the LSTM encoder as well as the last value of the input data into the LSTM decoder. With this information, the LSTM decoder makes predictions. During training, we allow the LSTM decoder to make predictions in three different ways. First, we can predict recursively, as shown below. 
 
 <p align="center">
-  <img src="code/plots/recursive.png" width="700">
+  <img src="figures/recursive.png" width="700">
   </p>
 
-That is, we recurrently feed the predicted decoder outputs into the LSTM deccoder until we have an output of the desired length. 
+That is, we recurrently feed the predicted decoder outputs into the LSTM deccoder until we have an output of the desired length. Second, we predict using teacher forcing. In teacher forcing, we feed the true target value into the LSTM decoder, as shown below. 
+
+<p align="center">
+  <img src="figures/teacher_forcing.png" width="700">
+  </p>
+
+Teacher forcing acts like "training wheels." If the model makes a bad prediction, it is put back in place with the true value. Finally, we can make predictions by randomly using teacher forcing. 
+
+A third option is to randomly use teacher forcing. Sometimes, we provide the LSTM decoder with the true value, while other times we require it to use the predicted value. In this approach, the "training wheels" are on some of the time. 
+
+<p align="center">
+  <img src="figures/teacher_forcing.png" width="700">
+  </p>
 
   
 
