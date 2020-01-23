@@ -205,7 +205,7 @@ class lstm_seq2seq(nn.Module):
 
                     optimizer.step()
 
-                batch_loss /= (n_batches * batch_size)
+                batch_loss /= n_batches 
                 losses[it] = batch_loss
 
                 
