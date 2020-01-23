@@ -7,7 +7,8 @@ We will consider a noisy sinusoidal curve
 
 '''
 
-import numpy as np 
+import numpy as np
+import torch
 
 def synthetic_data(Nt = 2000, tf = 80 * np.pi):
     
@@ -82,3 +83,25 @@ def windowed_dataset(y, input_window = 5, output_window = 1, stride = 1, num_fea
             Y[:, ii, ff] = y[start_y:end_y, ff]
 
     return X, Y
+
+
+def numpy_to_torch(Xtrain, Ytrain, Xtest, Ytest):
+    '''
+    convert numpy array to PyTorch tensor
+    
+    : param Xtrain:                           windowed training input data (seq_len, # in batch, number features); np.array
+    : param Ytrain:                           windowed training target data (seq_len, # in batch, number features); np.array
+    : param Xtest:                            windowed test input data (seq_len, # in batch, number features); np.array
+    : param Ytest:                            windowed test target data (seq_len, # in batch, number features); np.array
+    : return X_train_torch, Y_train_torch,
+    :        X_test_torch, Y_test_torch:      all input np.arrays converted to PyTorch tensors 
+
+    '''
+    
+    X_train_torch = torch.from_numpy(Xtrain).type(torch.Tensor)
+    Y_train_torch = torch.from_numpy(Ytrain).type(torch.Tensor)
+
+    X_test_torch = torch.from_numpy(Xtest).type(torch.Tensor)
+    Y_test_torch = torch.from_numpy(Ytest).type(torch.Tensor)
+    
+    return X_train_torch, Y_train_torch, X_test_torch, Y_test_torch

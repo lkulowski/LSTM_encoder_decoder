@@ -1,7 +1,7 @@
 # Building a LSTM Encoder-Deconder using PyTorch to make Sequence-to-Sequence Predictions
 
 ## Requirements 
-- `Python 3` 
+- `Python 3+` 
 - `PyTorch`
 - `numpy`
 - `scipy`
@@ -25,11 +25,11 @@ For sequence-to-sequence time series predictions, the past values of the time se
 
 The LSTM encoder-decoder consists of two LSTMs. The first LSTM, or the encoder, processes an input sequence and generates an encoded state. The encoded state summarizes the information in the input sequence. The second LSTM, or the decoder, uses the encoded state to produce an output sequence. Note that the input and output sequences can have different lengths.  
 
-In this project, we will build a LSTM encoder-decoder to make sequence-to-sequence predictions for time series data. For illustrative purposes, we will apply our model to a synthetic time series dataset. In [Section 2](#2-preparing-the-time-series-dataset), we will prepare the synthetic time series dataset to input into our LSTM encoder-decoder. In [Section 3](#3-build-the-lstm-encoder-decoder-using-pytorch), we will build the LSTM encoder-decoder using PyTorch. In [Section 4](#4-train-the-model-and-make-predictions), we will train the model and use it to make predictions. Finally, in [Section 5](#5-evaluate-lstm-encoder-decoder-on-train-and-test-datasets), we will evaluate our model on the train and test datasets.
+In this project, we will build a LSTM encoder-decoder to make sequence-to-sequence predictions for time series data. For illustrative purposes, we will apply our model to a synthetic time series dataset. In [Section 2](#2-preparing-the-time-series-dataset), we will prepare the synthetic time series dataset to input into our LSTM encoder-decoder. In [Section 3](#3-build-the-lstm-encoder-decoder-using-pytorch), we will build the LSTM encoder-decoder using PyTorch. We discuss how we train the model and use it to make predictions. Finally, in [Section 4](#4-evaluate-lstm-encoder-decoder-on-train-and-test-datasets), we will evaluate our model on the train and test datasets.
 
 ## 2 Preparing the Time Series Dataset
 
-For our time series, we consider the noisy sinusoidal curve plotted below. 
+We prepare the time series dataset in `generate_dataset.py`. For our time series, we consider the noisy sinusoidal curve plotted below. 
 
 <p align="center">
   <img src="code/plots/synthetic_time_series.png" width="900">
@@ -52,15 +52,29 @@ We will feed _X_ and _Y_ into our LSTM encoder-decoder for training. The LSTM en
 We apply the windowing procedure to our synthetic time series, using _n<sub>i</sub>_ = 80, _n<sub>o</sub>_ = 20, and stride = 5. An sample window is shown below.  
 
 <p align="center">
-  <img src="code/plots/windowed_data.png" width="500">
+  <img src="code/plots/windowed_data.png" width="600">
   </p>
   
 ## 3 Build the LSTM Encoder-Decoder using PyTorch
 
-  We will use PyTorch to build the LSTM encoder-decoder. Although we build the encoder and decoder separate, these two modules work together during the training and when making predictions. 
+We use PyTorch to build the LSTM encoder-decoder in `lstm.py`. 
 
 
-## 4 Train the Model and Make Predictions
 
-## 5 Evaluate LSTM Encoder-Decoder on Train and Test Datasets
+
+we build an encoder, with takes an input sequence and generates the encoded state 
+then we build a decoder, which takes the encoded state and makes predictions. 
+
+In the code, there are three different ways we can train the encoder-decoder. First, Second, Third. After it makes the predictions during training, it compares to the true target values and evaluates the loss function, which we use a MSE loss function. Then it backpropgates to update the weeights and make a better prediction. 
+
+
+During test phase, the 
+
+
+
+Although we build the encoder and decoder separate, these two modules work together during the training and when making predictions. 
+
+There are a few ways we can train the LSTM encoder-decoder. First, we can recurrently feed the predicted 
+
+## 4 Evaluate LSTM Encoder-Decoder on Train and Test Datasets
 

@@ -11,7 +11,9 @@ import matplotlib.pyplot as plt
 from importlib import reload
 import sys
 
+
 import generate_dataset
+import lstm_encoder_decoder
 
 import matplotlib
 matplotlib.rcParams.update({'font.size': 17})
@@ -26,10 +28,22 @@ ow = 20
 s = 5
 
 # generate windowed training/test datasets
-Xtrain, Ytrain = generate_dataset.windowed_dataset(y_train, input_window = iw, output_window = ow, stride = s)
+Xtrain, Ytrain= generate_dataset.windowed_dataset(y_train, input_window = iw, output_window = ow, stride = s)
 Xtest, Ytest = generate_dataset.windowed_dataset(y_test, input_window = iw, output_window = ow, stride = s)
 
+# convert windowed data from np.array to PyTorch tensor
+X_train, Y_train, X_test, Y_test = generate_dataset.numpy_to_torch(Xtrain, Ytrain, Xtest, Ytest)
 
+# specify model parameters and train
+model = lstm_encoder_decoder.lstm_seq2seq(input_size = X_train.shape[2], hidden_size = 15)
+loss, loss_tf, loss_no_tf = model.train_model(X_train, Y_train, n_epochs = 10, target_len = ow, batch_size = 5, teacher_forcing_ratio = 0.1, learning_rate = 0.01, dynamic_tf = False)
+
+
+
+
+
+
+sys.exit() 
 # plots: 
 # time series 
 plt.figure(figsize = (18, 6))
