@@ -87,7 +87,8 @@ Now that we have built the LSTM encoder-decoder, we can evaluate its performance
 
 `
 model = lstm_encoder_decoder.lstm_seq2seq(input_size = X_train.shape[2], hidden_size = 15)
-loss, loss_tf, loss_no_tf = model.train_model(X_train, Y_train, n_epochs = 50, target_len = ow, batch_size = 5, teacher_forcing_ratio = 0.5, learning_rate = 0.01, dynamic_tf = False)
+  
+model.train_model(X_train, Y_train, n_epochs = 50, target_len = ow, batch_size = 5, teacher_forcing_ratio = 0.5, learning_rate = 0.01, dynamic_tf = False)
 `
 
 Below, we have plotted a few examples of our model  
