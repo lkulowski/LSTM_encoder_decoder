@@ -95,7 +95,7 @@ model.train_model(X_train, Y_train, n_epochs = 50, target_len = 20, batch_size =
 We plot a few examples of our model for the train and test data.  
 
 <p align="center">
-  <img src="figures/predictions.png" width="700">
+  <img src="code/plots/predictions.png" width="700">
   </p>
 
 
