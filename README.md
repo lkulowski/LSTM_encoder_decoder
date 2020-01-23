@@ -12,7 +12,7 @@ There are many instances where we would like to predict how a time series will b
 <p align="center">
   <img src="figures/hawking.jpg" width="900">
     <br>
- <em> <font size = "4"> An example time series sequence-to-sequence prediction for the number of views Stephen Hawking's Wikipedia page receives is: given the past few months of viewership, how many times will the page be viewed in the next month? </font> </em>  
+ <em> <font size = "4"> An example time series sequence-to-sequence prediction for the number of views Stephen Hawking's Wikipedia <br> page receives is: given the past few months of viewership, how many times will the page be viewed in the next month? </font> </em>  
 </p>
 
 For sequence-to-sequence time series predictions, the past values of the time series often influence future values. In the case of Stephen Hawking's Wikipedia page, XXX [scientists get public interest]. The Long Short-Term Memory (LSTM) neural network is well-suited for this type of problem because it can learn long-term dependencies in the data. To make sequence-to-sequence predictions using a LSTM, we use an encoder-decoder architecture, which is shown below. 
@@ -20,7 +20,7 @@ For sequence-to-sequence time series predictions, the past values of the time se
 <p align="center">
   <img src="figures/encoder_decoder.png" width="700">
     <br>
- <em> <font size = "4"> The LSTM encoder-decoder allows us to make sequence-to-sequence predictions. The LSTM encoder summarizes the information from an the input sequence in an encoded state. The LSTM decoder takes the encoded state and uses it to produce an output sequence.  </font> </em>  
+ <em> <font size = "4"> The LSTM encoder-decoder allows us to make sequence-to-sequence predictions. </font> </em>  
 </p>
 
 The LSTM encoder-decoder consists of two LSTMs. The first LSTM, or the encoder, processes an input sequence and generates an encoded state. The encoded state summarizes the information in the input sequence. The second LSTM, or the decoder, uses the encoded state to produce an output sequence. Note that the input and output sequences can have different lengths.  
