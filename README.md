@@ -83,10 +83,10 @@ After we have trained the LSTM encoder-decoder, we can use it to make prediction
 
 ## 4 Evaluate LSTM Encoder-Decoder on Train and Test Datasets
 
-Now, let's evaluate our model performance. We build a LSTM encoder-decoder that takes in 80 time series values and predicts the next 20 values. We use a hidden state of 15 (the longer the hidden state, the more information the LSTM encoder can store) and . The specific model parameters that we use are shown below. 
+Now, let's evaluate our model performance. We build a LSTM encoder-decoder that takes in 80 time series values and predicts the next 20 values. During training, we use mixed teacher forcing so that there is a 50 percent chance that we use teacher forcing for each prediction. We use a hidden state of 15. Longer hidden states allow the LSTM encoder to store more information about the input series. The exact model parameters we use are shown below. 
 
 ```
-model = lstm_encoder_decoder.lstm_seq2seq(input_size = X_train.shape[2], hidden_size = 15)
+model = lstm_encoder_decoder.lstm_seq2seq(input_size = 80, hidden_size = 15)
   
 model.train_model(X_train, Y_train, n_epochs = 50, target_len = 20, batch_size = 5, 
                   teacher_forcing_ratio = 0.5, learning_rate = 0.01, dynamic_tf = False)
@@ -98,4 +98,4 @@ We plot a few examples of our model for the train and test data.
   <img src="code/plots/predictions.png" width="700">
   </p>
 
-We see that for both the train and test sets, the LSTM encoder-decoder is able to learn the 
+We see that for both the train and test sets, the LSTM encoder-decoder is able to learn the pattern in the time series.  
