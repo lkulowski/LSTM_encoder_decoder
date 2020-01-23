@@ -47,9 +47,9 @@ Right now, we have our dataset as one long time series. In order to train the LS
   <img src="figures/windowed_dataset.png" width="700">
   </p>
 
-We will feed _X_ and _Y_ into our LSTM encoder-decoder for training. The LSTM encoder-decoder expects _X_ and _Y_ to be 3-dimensional, with the third dimension being the number of features. We therefore augment the shape of _X_ to be (_n<sub>i</sub>_, _n<sub>w</sub>_, 1) and _Y_ to be (_n<sub>o</sub>_, _n<sub>w</sub>_, 1). 
+We will feed _X_ and _Y_ into our LSTM encoder-decoder for training. The LSTM encoder-decoder expects _X_ and _Y_ to be 3-dimensional, with the third dimension being the number of features. We therefore augment the shape of _X_ to (_n<sub>i</sub>_, _n<sub>w</sub>_, 1) and _Y_ to (_n<sub>o</sub>_, _n<sub>w</sub>_, 1). 
 
-We apply the windowing procedure to our synthetic time series, using _n<sub>i</sub>_ = 80, _n<sub>o</sub>_ = 20, and stride = 5. An sample window is shown below.  
+We apply the windowing procedure to our synthetic time series, using _n<sub>i</sub>_ = 80, _n<sub>o</sub>_ = 20, and stride = 5. An sample traning window is shown below.  
 
 <p align="center">
   <img src="code/plots/windowed_data.png" width="600">
@@ -57,10 +57,18 @@ We apply the windowing procedure to our synthetic time series, using _n<sub>i</s
   
 ## 3 Build the LSTM Encoder-Decoder using PyTorch
 
-We use PyTorch to build the LSTM encoder-decoder in `lstm.py`. 
+We use PyTorch to build the LSTM encoder-decoder in `lstm.py`. The LSTM encoder takes an input sequence and produces an encoded state (i.e., cell state and hidden state). We feed the last encoded state produced by the LSTM encoder as well as the last value of the input data into the LSTM decoder. With this information, the LSTM decoder makes predictions. During training, we allow the LSTM decoder to make predictions in three different ways. First, we can predict recursively. 
 
+<p align="center">
+  <img src="figures/recursive.png" width="700">
+  </p>
 
+That is, we recurrently feed the predicted decoder outputs into the LSTM deccoder until we have an output of the desired length. 
 
+  
+
+  
+On test data, the LSTM decoder makes predictions recursively.  During training, we allow the LSTM decoder to make predictions in three ways. First, the LSTM decoder  
 
 we build an encoder, with takes an input sequence and generates the encoded state 
 then we build a decoder, which takes the encoded state and makes predictions. 
