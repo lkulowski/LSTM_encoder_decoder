@@ -18,7 +18,7 @@ There are many instances where we would like to predict how a time series will b
 For sequence-to-sequence time series predictions, the past values of the time series often influence future values. In the case of Stephen Hawking's Wikipedia page, XXX [scientists get public interest]. The Long Short-Term Memory (LSTM) neural network is well-suited for this type of problem because it can learn long-term dependencies in the data. To make sequence-to-sequence predictions using a LSTM, we use an encoder-decoder architecture, which is shown below. 
 
 <p align="center">
-  <img src="figures/encoder_decoder.jpg" width="700">
+  <img src="figures/encoder_decoder.png" width="700">
     <br>
  <em> <font size = "4"> The LSTM encoder-decoder allows us to make sequence-to-sequence predictions. The LSTM encoder summarizes the information from an the input sequence in an encoded state. The LSTM decoder takes the encoded state and uses it to produce an output sequence.  </font> </em>  
 </p>
