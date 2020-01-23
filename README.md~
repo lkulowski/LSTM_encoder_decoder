@@ -63,7 +63,7 @@ We use PyTorch to build the LSTM encoder-decoder in `lstm.py`. The LSTM encoder 
   <img src="figures/recursive.png" width="700">
   </p>
 
-That is, we recurrently feed the predicted decoder outputs into the LSTM deccoder until we have an output of the desired length. Second, we can make predictions using teacher forcing. In teacher forcing, we feed the true target value into the LSTM decoder, as shown below. 
+That is, we recurrently feed the predicted decoder outputs, <img src="https://latex.codecogs.com/gif.latex?\boldsymbol{\hat{y}}^{(\tau_{i}&space;)}" title="\boldsymbol{\hat{y}}^{(\tau_{i} )}" />, into the LSTM decoder until we have an output of the desired length. Second, we can make predictions using teacher forcing. In teacher forcing, we feed the true target value into the LSTM decoder, as shown below. 
 
 <p align="center">
   <img src="figures/teacher_forcing.png" width="700">
