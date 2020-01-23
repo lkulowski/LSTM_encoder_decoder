@@ -57,7 +57,7 @@ We apply the windowing procedure to our synthetic time series, using _n<sub>i</s
   
 ## 3 Build the LSTM Encoder-Decoder using PyTorch
 
-We use PyTorch to build the LSTM encoder-decoder in `lstm.py`. The LSTM encoder takes an input sequence and produces an encoded state (i.e., cell state and hidden state). We feed the last encoded state produced by the LSTM encoder as well as the last value of the input data into the LSTM decoder. With this information, the LSTM decoder makes predictions. During training, we allow the LSTM decoder to make predictions in four different ways. First, we can predict recursively, as shown below. 
+We use PyTorch to build the LSTM encoder-decoder in `lstm.py`. The LSTM encoder takes an input sequence and produces an encoded state (i.e., cell state and hidden state). We feed the last encoded state produced by the LSTM encoder as well as the last value of the input data, <img src="https://latex.codecogs.com/gif.latex?\boldsymbol{x}^{(\tau)}" title="\boldsymbol{x}^{(\tau)}" />, into the LSTM decoder. With this information, the LSTM decoder makes predictions. During training, we allow the LSTM decoder to make predictions in four different ways. First, we can predict recursively, as shown below. 
 
 <p align="center">
   <img src="figures/recursive.png" width="700">
