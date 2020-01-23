@@ -85,10 +85,10 @@ After we have trained the LSTM encoder-decoder, we can use it to make prediction
 
 Now that we have built the LSTM encoder-decoder, we can evaluate its performance on the time series data. Here, we consider a LSTM encoder-decoder that takes in 80 input values and predicts the next 20 values. Our model has the following parameters
 
-`
+```
 model = lstm_encoder_decoder.lstm_seq2seq(input_size = X_train.shape[2], hidden_size = 15)
   
 model.train_model(X_train, Y_train, n_epochs = 50, target_len = ow, batch_size = 5, teacher_forcing_ratio = 0.5, learning_rate = 0.01, dynamic_tf = False)
-`
+```
 
 Below, we have plotted a few examples of our model  
