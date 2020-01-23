@@ -79,7 +79,7 @@ X_train, Y_train, X_test, Y_test = generate_dataset.numpy_to_torch(Xtrain, Ytrai
 
 # specify model parameters and train
 model = lstm_encoder_decoder.lstm_seq2seq(input_size = X_train.shape[2], hidden_size = 15)
-loss, loss_tf, loss_no_tf = model.train_model(X_train, Y_train, n_epochs = 50, target_len = ow, batch_size = 10, teacher_forcing_ratio = 0.1, learning_rate = 0.01, dynamic_tf = False)
+loss, loss_tf, loss_no_tf = model.train_model(X_train, Y_train, n_epochs = 50, target_len = ow, batch_size = 5, teacher_forcing_ratio = 1., learning_rate = 0.01, dynamic_tf = False)
 
 # plot predictions on train/test data
 plotting.plot_train_test_results(model, Xtrain, Ytrain, Xtest, Ytest)
