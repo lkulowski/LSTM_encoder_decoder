@@ -27,15 +27,15 @@ t_train, y_train, t_test, y_test = generate_dataset.train_test_split(t, y, split
 plt.figure(figsize = (18, 6))
 plt.plot(t, y, color = 'k', linewidth = 2)
 plt.xlim([t[0], t[-1]])
-plt.xlabel(r'$t$')
-plt.ylabel(r'$y$')
+plt.xlabel('$t$')
+plt.ylabel('$y$')
 plt.title('Synthetic Time Series')
 plt.savefig('plots/synthetic_time_series.png')
 
 # plot time series with train/test split
 plt.figure(figsize = (18, 6))
 plt.plot(t_train, y_train, color = '0.4', linewidth = 2, label = 'Train') 
-plt.plot(np.concatenate([t_train[-2:-1], t_test]), np.concatenate([y_train[-2:-1], y_test]),
+plt.plot(np.concatenate([[t_train[-1]], t_test]), np.concatenate([[y_train[-1]], y_test]),
          color = (0.74, 0.37, 0.22), linewidth = 2, label = 'Test')
 plt.xlim([t[0], t[-1]])
 plt.xlabel(r'$t$')

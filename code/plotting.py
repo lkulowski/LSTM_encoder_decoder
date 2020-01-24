@@ -43,7 +43,6 @@ def plot_train_test_results(lstm_model, Xtrain, Ytrain, Xtest, Ytest, num_rows =
       ax[ii, 0].set_xlabel('$t$')
       ax[ii, 0].set_ylabel('$y$')
 
-
       # test set
       X_test_plt = Xtest[:, ii, :]
       Y_test_pred = lstm_model.predict(torch.from_numpy(X_test_plt).type(torch.Tensor), target_len = ow)

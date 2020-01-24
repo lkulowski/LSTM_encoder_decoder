@@ -14,9 +14,9 @@ def synthetic_data(Nt = 2000, tf = 80 * np.pi):
     
     '''
     create synthetic time series dataset
-    : param Nt:       number of time steps (float)
-    : param tf:       final time (float)
-    : return t, y:    time, feature (arrays)
+    : param Nt:       number of time steps 
+    : param tf:       final time
+    : return t, y:    time, feature arrays
     '''
     
     t = np.linspace(0., tf, Nt)
@@ -30,9 +30,9 @@ def train_test_split(t, y, split = 0.8):
   
   split time series into train/test sets
   
-  : param t:                      time (array) 
-  : para y:                       feature (array)
-  : para split:                   percent of data to include in training set (float)
+  : param t:                      time array
+  : para y:                       feature array
+  : para split:                   percent of data to include in training set 
   : return t_train, y_train:      time/feature training and test sets;  
   :        t_test, y_test:        (shape: [# samples, 1])
   
@@ -58,12 +58,13 @@ def windowed_dataset(y, input_window = 5, output_window = 1, stride = 1, num_fea
     '''
     create a windowed dataset
     
-    : param y:                time series feature
+    : param y:                time series feature (array)
     : param input_window:     number of y samples to give model 
     : param output_window:    number of future y samples to predict  
     : param stide:            spacing between windows   
     : param num_features:     number of features (i.e., 1 for us, but we could have multiple features)
-    : return X, Y:            arrays with correct dimensions for LSTM (i.e., [# samples, time steps, # features])
+    : return X, Y:            arrays with correct dimensions for LSTM
+    :                         (i.e., [input/output window size # examples, # features])
     '''
   
     L = y.shape[0]
@@ -89,10 +90,10 @@ def numpy_to_torch(Xtrain, Ytrain, Xtest, Ytest):
     '''
     convert numpy array to PyTorch tensor
     
-    : param Xtrain:                           windowed training input data (seq_len, # in batch, number features); np.array
-    : param Ytrain:                           windowed training target data (seq_len, # in batch, number features); np.array
-    : param Xtest:                            windowed test input data (seq_len, # in batch, number features); np.array
-    : param Ytest:                            windowed test target data (seq_len, # in batch, number features); np.array
+    : param Xtrain:                           windowed training input data (input window size, # examples, # features); np.array
+    : param Ytrain:                           windowed training target data (output window size, # examples, # features); np.array
+    : param Xtest:                            windowed test input data (input window size, # examples, # features); np.array
+    : param Ytest:                            windowed test target data (output window size, # examples, # features); np.array
     : return X_train_torch, Y_train_torch,
     :        X_test_torch, Y_test_torch:      all input np.arrays converted to PyTorch tensors 
 

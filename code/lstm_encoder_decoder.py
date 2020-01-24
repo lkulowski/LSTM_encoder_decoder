@@ -43,6 +43,7 @@ class lstm_encoder(nn.Module):
         '''
         
         lstm_out, self.hidden = self.lstm(x_input.view(x_input.shape[0], x_input.shape[1], self.input_size))
+        
         return lstm_out, self.hidden     
     
     def init_hidden(self, batch_size):
