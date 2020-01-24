@@ -7,16 +7,15 @@ Example of using a LSTM encoder-decoder to model a synthetic time series
 '''
 
 import numpy as np
+import matplotlib
 import matplotlib.pyplot as plt
 from importlib import reload
 import sys
-
 
 import generate_dataset
 import lstm_encoder_decoder
 import plotting 
 
-import matplotlib
 matplotlib.rcParams.update({'font.size': 17})
 
 #----------------------------------------------------------------------------------------------------------------

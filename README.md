@@ -4,10 +4,9 @@
 - `Python 3+` 
 - `PyTorch`
 - `numpy`
-- `scipy`
 
 ## 1 Overview 
-There are many instances where we would like to predict how a time series will behave in the future. For example, we may be interested in forcasting web page viewership, weather conditions (temperature, humidity, etc.), power usage, or traffic volume. A sequence-to-sequence prediction for time series data involves using _m_ input values to predict the next _n_ values. An example sequence-to-sequence prediction for the number of views Stephen Hawking's Wikipedia page receives is shown below. Here, the past few months of viewership (black) is used to predict the next month of viewership (red).  
+There are many instances where we would like to predict how a time series will behave in the future. For example, we may be interested in forcasting web page viewership, weather conditions (temperature, humidity, etc.), power usage, or traffic volume. A sequence-to-sequence prediction for time series data involves using _n<sub>i</sub>_ input values to predict the next _n<sub>o</sub>_ values. An example sequence-to-sequence prediction for the number of views Stephen Hawking's Wikipedia page receives is shown below. Here, the past few months of viewership (black) is used to predict the next month of viewership (red).  
 
 <p align="center">
   <img src="figures/hawking.jpg" width="900">
