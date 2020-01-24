@@ -1,4 +1,4 @@
-# Building a LSTM Encoder-Deconder using PyTorch to make Sequence-to-Sequence Predictions
+# Building a LSTM Encoder-Decoder using PyTorch to make Sequence-to-Sequence Predictions
 
 ## Requirements 
 - `Python 3+` 
