@@ -9,13 +9,12 @@
 There are many instances where we would like to predict how a time series will behave in the future. For example, we may be interested in forcasting web page viewership, weather conditions (temperature, humidity, etc.), power usage, or traffic volume. In this project, we will focus on making sequence-to-sequence predictions for time series data. A sequence-to-sequence prediction uses _n<sub>i</sub>_ input values of the time series to predict the next _n<sub>o</sub>_ values. An example sequence-to-sequence prediction for the number of views Stephen Hawking's Wikipedia page receives is shown below.   
 <p align="center">
   <img src="figures/hawking.jpg" width="900">
-    <br>
- <em> <font size = "4"> An example time series sequence-to-sequence prediction for the number of views Stephen Hawking's Wikipedia <br> page receives. Given the past few months of viewership, how many times will the page be viewed in the next month? </font> </em>  
+    <br>  
 </p>
 
 Here, the past few months of viewership (black) is used to predict the next month (red) of viewership.  
 
-For sequence-to-sequence time series predictions, the past values of the time series often influence future values. In the case of Stephen Hawking's Wikipedia page, XXX [scientists get public interest]. The Long Short-Term Memory (LSTM) neural network is well-suited for this type of problem because it can learn long-term dependencies in the data. To make sequence-to-sequence predictions using a LSTM, we use an encoder-decoder architecture, which is shown below. 
+For sequence-to-sequence time series predictions, the past values of the time series often influence future values. In the case of Stephen Hawking's Wikipedia page, more people may view his page after he recieved an award or published a book. The increased discussion may stimulate other people to view his Wikipedia page, causing an upward trend in viewership. The Long Short-Term Memory (LSTM) neural network is well-suited for this type of problem because it can learn long-term dependencies in the data. To make sequence-to-sequence predictions using a LSTM, we use an encoder-decoder architecture, which is shown below. 
 
 <p align="center">
   <img src="figures/encoder_decoder.png" width="700">
