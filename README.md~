@@ -14,7 +14,7 @@ There are many instances where we would like to predict how a time series will b
 
 Here, the past few months of viewership (black) would be used to predict the next month (red) of viewership.  
 
-For sequence-to-sequence time series predictions, the past values of the time series often influence the future values. In the case of Stephen Hawking's Wikipedia page, more people may have viewed his page after he received an award or published a book. The increase in public discussion may have stimulated other people to view his Wikipedia page, causing an upward trend in viewership. The Long Short-Term Memory (LSTM) neural network is well-suited for sequence-to-sequence predictions because it can learn long-term dependencies in the data. To make sequence-to-sequence predictions using a LSTM, we use an encoder-decoder architecture. 
+For sequence-to-sequence time series predictions, the past values of the time series often influence the future values. In the case of Stephen Hawking's Wikipedia page, more people might view his page after a film or documentary about him is released. The increase in public discussion might stimulate other people to view his Wikipedia page, causing an upward trend in viewership. The Long Short-Term Memory (LSTM) neural network is well-suited to model this type of problem because it can learn time dependencies in the data. To make sequence-to-sequence predictions using a LSTM, we use an encoder-decoder architecture. 
 
 <p align="center">
   <img src="figures/encoder_decoder.png" width="700"> 
