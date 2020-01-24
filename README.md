@@ -14,17 +14,15 @@ There are many instances where we would like to predict how a time series will b
 
 Here, the past few months of viewership (black) is used to predict the next month (red) of viewership.  
 
-For sequence-to-sequence time series predictions, the past values of the time series often influence future values. In the case of Stephen Hawking's Wikipedia page, more people may view his page after he recieved an award or published a book. The increased discussion may stimulate other people to view his Wikipedia page, causing an upward trend in viewership. The Long Short-Term Memory (LSTM) neural network is well-suited for this type of problem because it can learn long-term dependencies in the data. To make sequence-to-sequence predictions using a LSTM, we use an encoder-decoder architecture, which is shown below. 
+For sequence-to-sequence time series predictions, the past values of the time series often influence future values. In the case of Stephen Hawking's Wikipedia page, more people may have viewed his page after he recieved an award or published a book. The increased discussion may have stimulated other people to view his Wikipedia page, causing an upward trend in viewership. The Long Short-Term Memory (LSTM) neural network is well-suited for this type of problem because it can learn long-term dependencies in the data. To make sequence-to-sequence predictions using a LSTM, we use an encoder-decoder architecture, which is shown below. 
 
 <p align="center">
-  <img src="figures/encoder_decoder.png" width="700">
-    <br>
- <em> <font size = "4"> The LSTM encoder-decoder allows us to make sequence-to-sequence predictions. </font> </em>  
+  <img src="figures/encoder_decoder.png" width="700"> 
 </p>
 
 The LSTM encoder-decoder consists of two LSTMs. The first LSTM, or the encoder, processes an input sequence and generates an encoded state. The encoded state summarizes the information in the input sequence. The second LSTM, or the decoder, uses the encoded state to produce an output sequence. Note that the input and output sequences can have different lengths.  
 
-In this project, we will build a LSTM encoder-decoder to make sequence-to-sequence predictions for time series data. For illustrative purposes, we will apply our model to a synthetic time series dataset. In [Section 2](#2-preparing-the-time-series-dataset), we will prepare the synthetic time series dataset to input into our LSTM encoder-decoder. In [Section 3](#3-build-the-lstm-encoder-decoder-using-pytorch), we will build the LSTM encoder-decoder using PyTorch. We discuss how we train the model and use it to make predictions. Finally, in [Section 4](#4-evaluate-lstm-encoder-decoder-on-train-and-test-datasets), we will evaluate our model on the train and test datasets.
+We will build a LSTM encoder-decoder using PyTorch to make sequence-to-sequence predictions for time series data. For illustrative purposes, we will apply our model to a synthetic time series dataset. In [Section 2](#2-preparing-the-time-series-dataset), we will prepare the synthetic time series dataset to input into our LSTM encoder-decoder. In [Section 3](#3-build-the-lstm-encoder-decoder-using-pytorch), we will build the LSTM encoder-decoder using PyTorch. We discuss how we train the model and use it to make predictions. Finally, in [Section 4](#4-evaluate-lstm-encoder-decoder-on-train-and-test-datasets), we will evaluate our model on the train and test datasets.
 
 ## 2 Preparing the Time Series Dataset
 
