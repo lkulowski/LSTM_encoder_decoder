@@ -12,9 +12,9 @@ There are many instances where we would like to predict how a time series will b
     <br>  
 </p>
 
-Here, the past few months of viewership (black) is used to predict the next month (red) of viewership.  
+Here, the past few months of viewership (black) would be used to predict the next month (red) of viewership.  
 
-For sequence-to-sequence time series predictions, the past values of the time series often influence future values. In the case of Stephen Hawking's Wikipedia page, more people may have viewed his page after he received an award or published a book. The increase in public discussion may have stimulated other people to view his Wikipedia page, causing an upward trend in viewership. The Long Short-Term Memory (LSTM) neural network is well-suited for sequence-to-sequence predictions because it can learn long-term dependencies in the data. To make sequence-to-sequence predictions using a LSTM, we use an encoder-decoder architecture. 
+For sequence-to-sequence time series predictions, the past values of the time series often influence the future values. In the case of Stephen Hawking's Wikipedia page, more people may have viewed his page after he received an award or published a book. The increase in public discussion may have stimulated other people to view his Wikipedia page, causing an upward trend in viewership. The Long Short-Term Memory (LSTM) neural network is well-suited for sequence-to-sequence predictions because it can learn long-term dependencies in the data. To make sequence-to-sequence predictions using a LSTM, we use an encoder-decoder architecture. 
 
 <p align="center">
   <img src="figures/encoder_decoder.png" width="700"> 
@@ -54,7 +54,7 @@ We apply the windowing procedure to our synthetic time series, using _n<sub>i</s
   
 ## 3 Build the LSTM Encoder-Decoder using PyTorch
 
-We use PyTorch to build the LSTM encoder-decoder in `lstm.py`. The LSTM encoder takes an input sequence and produces an encoded state (i.e., cell state and hidden state). We feed the last encoded state produced by the LSTM encoder as well as the last value of the input data, <img src="https://latex.codecogs.com/gif.latex?\boldsymbol{x}^{(\tau)}" title="\boldsymbol{x}^{(\tau)}" />, into the LSTM decoder. With this information, the LSTM decoder makes predictions. During training, we allow the LSTM decoder to make predictions in three different ways. First, we can predict recursively. 
+We use PyTorch to build the LSTM encoder-decoder in `lstm_encoder_decoder.py`. The LSTM encoder takes an input sequence and produces an encoded state (i.e., cell state and hidden state). We feed the last encoded state produced by the LSTM encoder as well as the last value of the input data, <img src="https://latex.codecogs.com/gif.latex?\boldsymbol{x}^{(\tau)}" title="\boldsymbol{x}^{(\tau)}" />, into the LSTM decoder. With this information, the LSTM decoder makes predictions. During training, we allow the LSTM decoder to make predictions in three different ways. First, we can predict recursively. 
 
 <p align="center">
   <img src="figures/recursive.png" width="700">
@@ -80,7 +80,7 @@ After we have trained the LSTM encoder-decoder, we can use it to make prediction
 
 ## 4 Evaluate LSTM Encoder-Decoder on Train and Test Datasets
 
-Now, let's evaluate our model performance. We build a LSTM encoder-decoder that takes in 80 time series values and predicts the next 20 values in `example.py`. During training, we use mixed teacher forcing. We set the level of mixed teacher forcing so that there is a 50 percent chance between predicting recursively and using teacher forcing. We use a hidden state of 15. Longer hidden states allow the LSTM encoder to store more information about the input series. The exact model parameters are shown below. 
+Now, let's evaluate our model performance. We build a LSTM encoder-decoder that takes in 80 time series values and predicts the next 20 values in `example.py`. During training, we use mixed teacher forcing. We set the level of mixed teacher forcing so that there is a 50 percent chance between predicting recursively and using teacher forcing. For this run, we set the size of the encoded state produced by the LSTM encoder to 15. Longer hidden states allow the LSTM encoder to store more information about the input series. The model specifications are shown below. 
 
 ```
 model = lstm_encoder_decoder.lstm_seq2seq(input_size = 80, hidden_size = 15)
