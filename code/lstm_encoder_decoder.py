@@ -128,8 +128,9 @@ class lstm_seq2seq(nn.Module):
         :                                  'mixed_teacher_forcing'); default is 'recursive'
         : param teacher_forcing_ratio:     float [0, 1) indicating how much teacher forcing to use when
         :                                  training_prediction = 'teacher_forcing.' For each batch in training, we generate a random
-        :                                  number. If the random number is less than teacher_forcing_ratio ratio, we use teacher forcing.
-        :                                  Otherwise, we predict recursively. If teacher_forcing_ratio = 1, we train only using teacher forcing.
+        :                                  number. If the random number is less than teacher_forcing_ratio, we use teacher forcing.
+        :                                  Otherwise, we predict recursively. If teacher_forcing_ratio = 1, we train only using
+        :                                  teacher forcing.
         : param learning_rate:             float >= 0; learning rate
         : param dynamic_tf:                use dynamic teacher forcing (True/False); dynamic teacher forcing
         :                                  reduces the amount of teacher forcing for each epoch
