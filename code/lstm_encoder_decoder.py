@@ -114,7 +114,7 @@ class lstm_seq2seq(nn.Module):
         self.decoder = lstm_decoder(input_size = input_size, hidden_size = hidden_size)
 
 
-    def train_model(self, input_tensor, target_tensor, n_epochs, target_len, batch_size, teacher_forcing_ratio, learning_rate = 0.01, dynamic_tf = False):
+    def train_model(self, input_tensor, target_tensor, n_epochs, target_len, batch_size, training_prediction = 'recursive', teacher_forcing_ratio = 0.5, learning_rate = 0.01, dynamic_tf = False):
         
         '''
         train lstm encoder-decoder
@@ -123,21 +123,21 @@ class lstm_seq2seq(nn.Module):
         : param target_tensor:             target data with shape (seq_len, # in batch, number features); PyTorch tensor
         : param n_epochs:                  number of epochs 
         : param target_len:                number of values to predict 
-        : param batch_size:                number of samples per gradient update 
-        : param teacher_forcing_ratio:     float [0, 1) indicating how much teacher forcing;
-        :                                  higher value means more teacher forcing
-        : param learning_rate:             float >= 0; learning rate 
+        : param batch_size:                number of samples per gradient update
+        : param training_prediction:       type of prediction to make during training ('recursive', 'teacher_forcing', or
+        :                                  'mixed_teacher_forcing'); default is 'recursive'
+        : param teacher_forcing_ratio:     float [0, 1) indicating how much teacher forcing to use when
+        :                                  training_prediction = 'teacher_forcing.' For each batch in training, we generate a random
+        :                                  number. If the random number is less than teacher_forcing_ratio ratio, we use teacher forcing.
+        :                                  Otherwise, we predict recursively. If teacher_forcing_ratio = 1, we train only using teacher forcing.
+        : param learning_rate:             float >= 0; learning rate
         : param dynamic_tf:                use dynamic teacher forcing (True/False); dynamic teacher forcing
         :                                  reduces the amount of teacher forcing for each epoch
-        : return losses, losses_tf,
-        :        losses_no_tf:             array of total loss, teacher forcing loss, and no teacher forcing loss for
-        :                                  each epoch     
+        : return losses:                   array of loss function for each epoch
         '''
         
         # initialize array of losses 
         losses = np.full(n_epochs, np.nan)
-        losses_tf = np.full(n_epochs, np.nan)
-        losses_no_tf = np.full(n_epochs, np.nan)
 
         optimizer = optim.Adam(self.parameters(), lr = learning_rate)
         criterion = nn.MSELoss()
@@ -175,55 +175,62 @@ class lstm_seq2seq(nn.Module):
                     decoder_input = input_batch[-1, :, :]   # shape: (batch_size, input_size)
                     decoder_hidden = encoder_hidden
 
-                    use_teacher_forcing = ( random.random() < teacher_forcing_ratio )
-
-                    if use_teacher_forcing:
-                        # teacher forcing: feed the target as the next input
-                        for t in range(target_len): 
-                            decoder_output, decoder_hidden = self.decoder(decoder_input, decoder_hidden)
-                            outputs[t] = decoder_output
-                            decoder_input = target_batch[t, :, :]
-
-                    else:
+                    if training_prediction == 'recursive':
                         # predict recursively
                         for t in range(target_len): 
                             decoder_output, decoder_hidden = self.decoder(decoder_input, decoder_hidden)
                             outputs[t] = decoder_output
                             decoder_input = decoder_output
 
-                    loss = criterion(outputs, target_batch)
+                    if training_prediction == 'teacher_forcing':
+                        # use teacher forcing
+                        if random.random() < teacher_forcing_ratio:
+                            for t in range(target_len): 
+                                decoder_output, decoder_hidden = self.decoder(decoder_input, decoder_hidden)
+                                outputs[t] = decoder_output
+                                decoder_input = target_batch[t, :, :]
 
+                        # predict recursively 
+                        else:
+                            for t in range(target_len): 
+                                decoder_output, decoder_hidden = self.decoder(decoder_input, decoder_hidden)
+                                outputs[t] = decoder_output
+                                decoder_input = decoder_output
+
+                    if training_prediction == 'mixed_teacher_forcing':
+                        # predict using mixed teacher forcing
+                        for t in range(target_len):
+                            decoder_output, decoder_hidden = self.decoder(decoder_input, decoder_hidden)
+                            outputs[t] = decoder_output
+                            
+                            # predict with teacher forcing
+                            if random.random() < teacher_forcing_ratio:
+                                decoder_input = target_batch[t, :, :]
+                            
+                            # predict recursively 
+                            else:
+                                decoder_input = decoder_output
+
+                    # compute the loss 
+                    loss = criterion(outputs, target_batch)
                     batch_loss += loss.item()
                     
-                    if use_teacher_forcing:
-                        num_tf += batch_size
-                        batch_loss_tf += loss.item()
-                    else:
-                        num_no_tf += batch_size
-                        batch_loss_no_tf += loss.item()
-
+                    # backpropagation
                     loss.backward()
-
                     optimizer.step()
 
+                # loss for epoch 
                 batch_loss /= n_batches 
                 losses[it] = batch_loss
 
-                
-                if num_no_tf != 0.: 
-                    batch_loss_no_tf /= num_no_tf
-                    losses_no_tf[it] = batch_loss_no_tf
-                    
-                if num_tf !=0:
-                    batch_loss_tf /= num_tf
-                    losses_tf[it] = batch_loss_tf
-
+                # dynamic teacher forcing
                 if dynamic_tf and teacher_forcing_ratio > 0:
                     teacher_forcing_ratio = teacher_forcing_ratio - 0.02 
-                    
+
+                # progress bar 
                 tr.set_postfix(loss="{0:.3f}".format(batch_loss))
                     
-        return losses, losses_tf, losses_no_tf
+        return losses
 
     def predict(self, input_tensor, target_len):
         
