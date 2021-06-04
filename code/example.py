@@ -77,7 +77,7 @@ plt.savefig('plots/windowed_data.png')
 X_train, Y_train, X_test, Y_test = generate_dataset.numpy_to_torch(Xtrain, Ytrain, Xtest, Ytest)
 
 # specify model parameters and train
-model = lstm_encoder_decoder.lstm_seq2seq(input_size = X_train.shape[2], hidden_size = 15)
+model = lstm_encoder_decoder.lstm_seq2seq(input_size = X_train.shape[2],target_size=Y_train.shape[2], hidden_size = 15)
 loss = model.train_model(X_train, Y_train, n_epochs = 50, target_len = ow, batch_size = 5, training_prediction = 'mixed_teacher_forcing', teacher_forcing_ratio = 0.6, learning_rate = 0.01, dynamic_tf = False)
 
 # plot predictions on train/test data
